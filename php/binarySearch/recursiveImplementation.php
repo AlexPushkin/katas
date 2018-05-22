@@ -5,6 +5,10 @@ function binarySearch(int $needle, array $items): int
 {
     $count = \count($items);
 
+    if ($count === 0) {
+        return -1;
+    }
+
     if ($count === 1) {
         return $needle === $items[0] ? 0 : -1;
     }
