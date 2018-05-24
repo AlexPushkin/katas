@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 function binarySearch(int $needle, array $items, int $start, int $end): int
 {
-    $count = $end - $start;
+    $count = $end - $start + 1;
 
     if ($count === 0) {
         return -1;
@@ -20,9 +20,9 @@ function binarySearch(int $needle, array $items, int $start, int $end): int
         return $mid;
     }
 
-//    if ($end - $mid === 1) {
-//        return $needle === $items[$end] ? $end : -1;
-//    }
+    if ($end - $start === 1) {
+        return $needle === $items[$end] ? $end : -1;
+    }
 
     if ($mid < $needle) {
         return binarySearch($needle, $items, $mid, $end);
@@ -33,12 +33,7 @@ function binarySearch(int $needle, array $items, int $start, int $end): int
 
 function binaryWrapper(int $needle, array $items): int
 {
-    $count = \count($items);
-    if ($count === 1) {
-        return $needle === $items[0] ? 0 : -1;
-    }
-
-    return binarySearch($needle, $items, 0, $count - 1);
+    return binarySearch($needle, $items, 0, \count($items) - 1);
 }
 
 
