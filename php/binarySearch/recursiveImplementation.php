@@ -20,7 +20,7 @@ function binarySearch(int $needle, array $items, int $start, int $end): int
         return $mid;
     }
 
-    if ($end - $start === 1) {
+    if ($count === 2) {
         return $needle === $items[$end] ? $end : -1;
     }
 
