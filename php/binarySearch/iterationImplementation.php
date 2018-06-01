@@ -1,38 +1,30 @@
 <?php
 declare(strict_types=1);
 
-function binarySearch(int $needle, array $items): int
+function find(int $needle, array $items, int $start, int $end): int
 {
-    $result = -1;
-
-    if (($count = \count($items)) === 1) {
-        return $items[0] === $needle ? 0 : $result;
-    }
-
-    $high = $count - 1;
-    $low = 0;
-
-    while ($low < $high) {
-        $mid = (int)floor(($low + $high) / 2);
-        $midItem = $items[$mid];
+    while ($start <= $end) {
+        $mid = (int)floor(($start + $end) / 2);
 
         switch (true) {
-            case $needle === $midItem:
+            case $needle === $items[$mid]:
                 return $mid;
 
-            case $high - $low === 1:
-                return $needle === $items[$high] ? $high : $result;
-
             case $mid < $needle:
-                $low = $mid;
+                $start = $mid + 1;
                 break;
 
             default:
-                $high = $mid;
+                $end = $mid - 1;
         }
     }
 
-    return $result;
+    return -1;
+}
+
+function binarySearch(int $needle, array $array):int
+{
+    return find($needle, $array, 0, \count($array) - 1);
 }
 
 assert(-1 === binarySearch(3, []));
