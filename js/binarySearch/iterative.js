@@ -4,40 +4,26 @@ function assert(expect, actual) {
     }
 }
 
-function binarySearch(needle, array) {
-    let arrayLength = array.length;
+function find(needle, array, start, end) {
+    while (start <= end) {
+        let mid = Math.floor((start + end) / 2);
 
-    if (arrayLength === 0) {
-        return -1;
-    }
-
-    if (arrayLength === 1) {
-        return array[0] === needle ? 0 : -1;
-    }
-
-    let low = 0;
-    let hi = arrayLength - 1;
-
-    while (low < hi) {
-        let mid = Math.floor((low + hi) / 2);
-        let midValue = array[mid];
-
-        if (midValue === needle) {
+        if (array[mid] === needle) {
             return mid;
         }
 
-        if (hi - low === 1) {
-            return needle === array[hi] ? hi : -1;
-        }
-
-        if (midValue < needle) {
-            low = mid;
+        if (array[mid] < needle) {
+            start = mid + 1;
         } else {
-            hi = mid;
+            end = mid - 1;
         }
     }
 
     return -1;
+}
+
+function binarySearch(needle, array) {
+    return find(needle, array, 0, array.length - 1);
 }
 
 assert(-1, binarySearch(3, []));

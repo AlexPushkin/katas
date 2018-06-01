@@ -8,32 +8,22 @@ function binarySearch(needle, array) {
     return find(needle, array, 0, array.length - 1);
 }
 
-function find(needle, array, low, hi) {
-    let count = hi - low + 1;
-
-    if (count === 0) {
+function find(needle, array, start, end) {
+    if (start > end) {
         return -1;
     }
 
-    if (count === 1) {
-        return needle === array[low] ? low : -1;
-    }
+    let mid = Math.floor((start + end) / 2);
 
-    let mid = Math.floor((low + hi) / 2);
-    let midValue = array[mid];
-    if (midValue === needle) {
+    if (array[mid] === needle) {
         return mid;
     }
 
-    if (count === 2) {
-        return array[hi] === needle ? hi : -1;
+    if (array[mid] < needle) {
+        return find(needle, array, mid + 1, end);
     }
 
-    if (midValue < needle) {
-        return find(needle, array, mid, hi);
-    }
-
-    return find(needle, array, low, mid);
+    return find(needle, array, start, mid - 1);
 }
 
 assert(-1, binarySearch(3, []));
