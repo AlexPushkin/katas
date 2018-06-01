@@ -10,7 +10,7 @@ function find(int $needle, array $items, int $start, int $end): int
             case $needle === $items[$mid]:
                 return $mid;
 
-            case $mid < $needle:
+            case $items[$mid] < $needle:
                 $start = $mid + 1;
                 break;
 

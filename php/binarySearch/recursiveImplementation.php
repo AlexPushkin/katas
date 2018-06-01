@@ -9,15 +9,16 @@ function binarySearch(int $needle, array $items, int $start, int $end): int
 
     $mid = (int)floor(($start + $end) / 2);
 
-    if ($items[$mid] === $needle) {
-        return $mid;
-    }
+    switch (true) {
+        case $items[$mid] === $needle:
+            return $mid;
 
-    if ($mid < $needle) {
-        return binarySearch($needle, $items, $mid + 1, $end);
-    }
+        case $items[$mid] < $needle:
+            return binarySearch($needle, $items, $mid + 1, $end);
 
-    return binarySearch($needle, $items, $start, $mid - 1);
+        default:
+            return binarySearch($needle, $items, $start, $mid - 1);
+    }
 }
 
 function binaryWrapper(int $needle, array $items): int

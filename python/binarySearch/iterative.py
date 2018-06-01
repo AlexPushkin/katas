@@ -1,34 +1,20 @@
-import math
+def search(needle, array, start, end):
+    while start <= end:
+        mid = int((start + end) / 2)
+
+        if array[mid] == needle:
+            return mid
+
+        if array[mid] < needle:
+            start = mid + 1
+        else:
+            end = mid - 1
+
+    return -1
 
 
 def binary_search(needle, array):
-    count = len(array)
-
-    if count == 0:
-        return -1
-
-    if count == 1:
-        return 0 if array[0] == needle else -1
-
-    low = 0
-    high = count - 1
-
-    while low < high:
-        mid = int(math.floor((high + low) / 2))
-        mid_value = array[mid]
-
-        if mid_value == needle:
-            return mid
-
-        if high - low == 1:
-            return high if array[high] == needle else -1
-
-        if mid_value < needle:
-            low = mid
-        else:
-            high = mid
-
-    return -1
+    return search(needle, array, 0, len(array) - 1)
 
 
 assert -1 == binary_search(3, [])
